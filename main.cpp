@@ -25,6 +25,17 @@ struct Customer
     string order;
 };
 
+class Queue {
+    private:
+    Customer data;
+    Queue* next = nullptr;
+public:
+
+    Queue(Customer data) {
+        this->data = data;
+    }
+};
+
 int main()
 {
     
