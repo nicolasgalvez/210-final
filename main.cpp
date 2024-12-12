@@ -23,21 +23,38 @@ struct Customer
 {
     string name;
     string order;
+    Customer *next;
 };
 
 class Queue {
     private:
-    Customer data;
-    Queue* next = nullptr;
+    Customer *head;
 public:
+    Queue() {
+        Customer *data = new Customer();
+
+        data->name = namesData[rand() % DATA_SIZE];
+        data->order = drinkData[rand() % DATA_SIZE];
+        data->next = head;
+        // cout << data.order << data.name;
+    }
     Queue(Customer data) {
         this->data = data;
+    }
+    void addCustomer() {
+        Customer *newCustomer = new Customer(data);
+        newCustomer->next = NULL;
+        Customer *temp = newCustomer;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newCustomer;
     }
 };
 
 int main()
 {
-    
+    Queue coffeeShop = Queue();
     // test(hash_table);
     return 0;
 }

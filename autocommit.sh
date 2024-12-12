@@ -4,7 +4,8 @@
 
 # Interval in minutes
 INTERVAL=10
-
+set -x
+set -e
 # accept an argument for the interval
 if [ "$1" != "" ]; then
     INTERVAL=$1
