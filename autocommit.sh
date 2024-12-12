@@ -4,8 +4,8 @@
 
 # Interval in minutes
 INTERVAL=10
-set -x
-set -e
+# set -x
+# set -e
 # accept an argument for the interval
 if [ "$1" != "" ]; then
     INTERVAL=$1
@@ -17,12 +17,12 @@ echo "Example: $0 5"
 
 # Run watch
 commit_code() {
-    git pull && (git ls-files --modified --others --exclude-standard | grep . >/dev/null) && {
+    # git pull && (git ls-files --modified --others --exclude-standard | grep . >/dev/null) && {
         echo -e "changes found, comitting code..."
         git add .
         git commit -m 'autocommit'
         git push
-    }
+    # }
 }
 # Since my mac doesn't have 'watch', I found a stackexchange post and adapted a solution 
 # You can use brew to install but I figure I'll try this to avoid platform specific dependencies if possible
@@ -33,12 +33,11 @@ fakewatch() {
     while true; do
         DATE=$(date)
         RESULT=$(commit_code)
-        clear
         echo "$DATE"
         echo "$RESULT"
         sleep $((INTERVAL * 60))
         count=$((count + 1))
-        # echo "watched $count times" # TODO: make a -v argument to show this
+        echo "watched $count times" # TODO: make a -v argument to show this
     done
 }
 

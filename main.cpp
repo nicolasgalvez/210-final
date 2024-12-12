@@ -30,31 +30,47 @@ class Queue {
     private:
     Customer *head;
 public:
-    Queue() {
-        Customer *data = new Customer();
-
-        data->name = namesData[rand() % DATA_SIZE];
-        data->order = drinkData[rand() % DATA_SIZE];
-        data->next = head;
-        // cout << data.order << data.name;
-    }
-    Queue(Customer data) {
-        this->data = data;
-    }
     void addCustomer() {
-        Customer *newCustomer = new Customer(data);
-        newCustomer->next = NULL;
-        Customer *temp = newCustomer;
-        while (temp->next != NULL) {
+        Customer *temp = new Customer();
+        temp->name = namesData[rand() % DATA_SIZE];
+        temp->order = drinkData[rand() % DATA_SIZE];
+        temp->next = head;
+        head = temp;
+        // cout << temp->order << temp->name;
+    }
+    void removeCustomer(){
+
+    Customer *temp = head;
+    head = head->next;
+    delete temp;
+
+    }
+    void display(){
+        Customer *temp = head;
+        int cound = 1;
+        while(temp != NULL){
+            cout << cound << ": " << temp->name << ": " << temp->order << endl;
             temp = temp->next;
+            cound++;
         }
-        temp->next = newCustomer;
+    }
+    void process () {
+        
     }
 };
 
 int main()
 {
     Queue coffeeShop = Queue();
+
+    coffeeShop.addCustomer();
+    coffeeShop.addCustomer();
+    coffeeShop.addCustomer();
+    
+    coffeeShop.display();
+    cout << endl;
+    coffeeShop.removeCustomer();
+    coffeeShop.display();
     // test(hash_table);
     return 0;
 }
