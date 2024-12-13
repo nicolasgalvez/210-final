@@ -42,14 +42,14 @@ public:
         temp->order = drinkData[rand() % DATA_SIZE];
         temp->next = head;
         head = temp;
-        cout << temp->name << " has joined. They usually want a " << temp->order << endl;
+        cout << temp->name << " has joined the coffee line. They usually want a " << temp->order << endl;
     }
     void addToEnd()
     {
         Customer *temp = new Customer();
         temp->name = namesData[rand() % DATA_SIZE];
         temp->order = drinkData[rand() % DATA_SIZE];
-        cout << temp->name << " has joined. They usually want a " << temp->order << endl;
+        cout << temp->name << " has joined the coffee line. They usually want a " << temp->order << endl;
 
         temp->next = NULL;
         if (head == NULL)
@@ -73,7 +73,7 @@ public:
         }
         if (!head->next)
         {
-            cout << head->name << " gghas been served." << endl;
+            cout << head->name << " has been served." << endl;
             delete head;
             head = NULL;
             return;
@@ -85,7 +85,7 @@ public:
             temp = temp->next;
         }
 
-        cout << temp->next->name << " has ffbeen served." << endl;
+        cout << temp->next->name << " has been served." << endl;
         delete temp->next;
         temp->next = NULL;
     }
@@ -97,7 +97,7 @@ public:
             return;
         }
         Customer *temp = head;
-        cout << head->name << " has been served." << endl;
+        cout << head->name << " has been served a " << head->order << endl;
         head = head->next;
         delete temp;
     }
@@ -139,14 +139,20 @@ class MuffinQueue {
         addToEnd();
     }
     void addToEnd() {
-                Customer temp;
+        Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = muffinData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the Muffin line. They usually want a " << temp.order << endl;
     }
     void serve() {
-
+        if (customers.size() == 0)
+        {
+            cout << "No customers in line" << endl;
+            return;
+        }
+        cout << customers[0].name << " has been served a " << customers[0].order << endl;
+        customers.erase(customers.begin());
     }
     void display()
     {
@@ -176,20 +182,33 @@ class BraceletQueue {
     private:
     vector<Customer> customers;
     public:
+    BraceletQueue() {
+        // add 3 customers to the list
+        addToEnd();
+        addToEnd();
+        addToEnd();
+    }
     void addToEnd() {
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
-        temp.order = goatData[rand() % DATA_SIZE];
+        temp.order = friendShipBraceletData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the bracelet line. They usually want a " << temp.order << endl;
     }
     void serve() {
-        
+        if (customers.size() == 0)
+        {
+            cout << "No customers in line" << endl;
+            return;
+        }
+        cout << customers[0].name << " has been served a " << customers[0].order << endl;
+        customers.erase(customers.begin());
+
     }
     void display()
     {
         int count = 1;
-        cout << "Goat Queue" << endl;
+        cout << "Bracelet Queue" << endl;
         for (auto it = customers.begin(); it != customers.end(); it++)
         {
             cout << count << ": " << it->name << ": " << it->order << endl;
@@ -226,7 +245,7 @@ class GoatQueue {
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = goatData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the goat line. They usually want a " << temp.order << endl;
     }
     void serve() {
         if (customers.size() == 0)
