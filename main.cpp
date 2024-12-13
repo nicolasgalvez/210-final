@@ -9,15 +9,18 @@
 #include <fstream>
 #include <map>
 #include <list>
+#include <deque>
+#include <vector>
 
 using namespace std;
 
 const int DATA_SIZE = 10, ROUNDS = 10;
 
 string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Chandler", "Gunther", "Janice", "Paul Rudd", "Susan"},
-       drinkData[DATA_SIZE] = {"Espresso", "Latte", "Cappuccino", "Mocha", "Americano", "Macchiato", "Flat White", "Soy Latte", "Irish Coffee", "Turkish Coffee"
-    
-    };
+       drinkData[DATA_SIZE] = {"Espresso", "Latte", "Cappuccino", "Mocha", "Americano", "Macchiato", "Flat White", "Soy Latte", "Irish Coffee", "Turkish Coffee"},
+       muffinData[DATA_SIZE] = {"Blueberry", "Chocolate Chip", "Banana Nut", "Lemon Poppyseed", "Pumpkin Spice", "Cranberry Orange", "Apple Cinnamon", "Carrot", "Coffee Cake", "Double Chocolate"},
+       friendShipBraceletData[DATA_SIZE] = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "White", "Brown"},
+       goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"};
 
 struct Customer
 {
@@ -122,6 +125,85 @@ public:
         display();
     }
 };
+
+// deqeue
+class MuffinQueue {
+    private:
+    deque<Customer> customers;
+    void addToEnd() {
+
+    }
+    void serve() {
+
+    }
+    void display()
+    {
+    }
+    void process()
+    {
+        // remove a customer
+        serve();
+        // if 50% chance, add a customer
+        if (rand() % 2 == 0)
+        {
+            addToEnd();
+        }
+        display();
+    }
+};
+
+// vector
+class BraceletQueue {
+    private:
+    vector<Customer> customers;
+    void addToEnd() {
+
+    }
+    void serve() {
+        
+    }
+    void display()
+    {
+    }
+    void process()
+    {
+        // remove a customer
+        serve();
+        // if 50% chance, add a customer
+        if (rand() % 2 == 0)
+        {
+            addToEnd();
+        }
+        display();
+    }
+};
+
+// vector
+class BraceletQueue {
+    private:
+    vector<Customer> customers;
+    void addToEnd() {
+
+    }
+    void serve() {
+        
+    }
+    void display()
+    {
+    }
+    void process()
+    {
+        // remove a customer
+        serve();
+        // if 50% chance, add a customer
+        if (rand() % 2 == 0)
+        {
+            addToEnd();
+        }
+        display();
+    }
+};
+
 
 int main()
 {
