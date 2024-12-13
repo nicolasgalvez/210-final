@@ -57,6 +57,7 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "map": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "deque": "cpp"
     }
 }

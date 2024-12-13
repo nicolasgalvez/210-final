@@ -8,6 +8,8 @@
 #include <list>
 #include <deque>
 #include <vector>
+#include <random>
+#include <functional>
 
 using namespace std;
 
@@ -18,6 +20,14 @@ string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Ch
        muffinData[DATA_SIZE] = {"Blueberry", "Chocolate Chip", "Banana Nut", "Lemon Poppyseed", "Pumpkin Spice", "Cranberry Orange", "Apple Cinnamon", "Carrot", "Coffee Cake", "Double Chocolate"},
        friendShipBraceletData[DATA_SIZE] = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "White", "Brown"},
        goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"};
+
+
+int randomInt(int min, int max) {
+    static std::random_device rd;  // Seed
+    static std::mt19937 gen(rd()); // Random number engine
+    std::uniform_int_distribution<> distrib(min, max); // Distribution
+    return distrib(gen);
+}
 
 struct CoffeeCustomer
 {
@@ -51,6 +61,12 @@ public:
         CoffeeCustomer *temp = new CoffeeCustomer();
         temp->name = namesData[rand() % DATA_SIZE];
         temp->order = drinkData[rand() % DATA_SIZE];
+
+        if (temp->name == "Paul Rudd")
+        {
+            temp->order = "career after 'Friends'";
+        }
+
         temp->next = head;
         head = temp;
         cout << temp->name << " has joined the coffee line. They usually want a " << temp->order << endl;
@@ -158,6 +174,12 @@ public:
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = muffinData[rand() % DATA_SIZE];
+        
+        if (temp.name == "Joey")
+        {
+            temp.order = "All of them";
+        }
+
         customers.push_back(temp);
         cout << temp.name << " has joined the Muffin line. They usually want a " << temp.order << " muffin." << endl;
     }
@@ -215,7 +237,7 @@ public:
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = friendShipBraceletData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined the bracelet line. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the bracelet line. They are trying on a " << temp.order << " bracelet." << endl;
     }
     void serve()
     {
@@ -224,7 +246,7 @@ public:
             cout << "No customers in line" << endl;
             return;
         }
-        cout << customers[0].name << " has been served a " << customers[0].order << endl;
+        cout << customers[0].name << " has been sold a " << customers[0].order << " bracelet." << endl;
         customers.erase(customers.begin());
     }
     void display()
@@ -272,7 +294,7 @@ public:
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = goatData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined the goat line. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the goat line. They have their eye on a " << temp.order << endl;
     }
     void serve()
     {
@@ -281,7 +303,7 @@ public:
             cout << "No customers in line" << endl;
             return;
         }
-        cout << customers.front().name << " has been served." << endl;
+        cout << customers.front().name << " left with a " << customers.front().order << endl;
         customers.pop_front();
     }
     void display()
