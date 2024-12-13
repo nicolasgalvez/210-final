@@ -104,6 +104,7 @@ public:
 
     void display()
     {
+        cout << "Coffee Queue" << endl;
         Customer *temp = head;
         int cound = 1;
         while (temp != NULL)
@@ -130,14 +131,32 @@ public:
 class MuffinQueue {
     private:
     deque<Customer> customers;
+    public:
+    MuffinQueue() {
+        // add 3 customers to the list
+        addToEnd();
+        addToEnd();
+        addToEnd();
+    }
     void addToEnd() {
-
+                Customer temp;
+        temp.name = namesData[rand() % DATA_SIZE];
+        temp.order = muffinData[rand() % DATA_SIZE];
+        customers.push_back(temp);
+        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
     }
     void serve() {
 
     }
     void display()
     {
+        int count = 1;
+        cout << "Muffin Queue" << endl;
+        for (auto it = customers.begin(); it != customers.end(); it++)
+        {
+            cout << count << ": " << it->name << ": " << it->order << endl;
+            count++;
+        }
     }
     void process()
     {
@@ -156,14 +175,26 @@ class MuffinQueue {
 class BraceletQueue {
     private:
     vector<Customer> customers;
+    public:
     void addToEnd() {
-
+        Customer temp;
+        temp.name = namesData[rand() % DATA_SIZE];
+        temp.order = goatData[rand() % DATA_SIZE];
+        customers.push_back(temp);
+        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
     }
     void serve() {
         
     }
     void display()
     {
+        int count = 1;
+        cout << "Goat Queue" << endl;
+        for (auto it = customers.begin(); it != customers.end(); it++)
+        {
+            cout << count << ": " << it->name << ": " << it->order << endl;
+            count++;
+        }
     }
     void process()
     {
@@ -178,18 +209,42 @@ class BraceletQueue {
     }
 };
 
-// vector
-class BraceletQueue {
+// list
+class GoatQueue {
     private:
-    vector<Customer> customers;
+    list<Customer> customers;
+    public:
+    GoatQueue() {
+        // add 3 customers to the list
+        addToEnd();
+        addToEnd();
+        addToEnd();
+    }
     void addToEnd() {
-
+        // add a customer to the end of the list
+        Customer temp;
+        temp.name = namesData[rand() % DATA_SIZE];
+        temp.order = goatData[rand() % DATA_SIZE];
+        customers.push_back(temp);
+        cout << temp.name << " has joined. They usually want a " << temp.order << endl;
     }
     void serve() {
-        
+        if (customers.size() == 0)
+        {
+            cout << "No customers in line" << endl;
+            return;
+        }
+        cout << customers.front().name << " has been served." << endl;
     }
     void display()
     {
+        int count = 1;
+        cout << "Goat Queue" << endl;
+        for (auto it = customers.begin(); it != customers.end(); it++)
+        {
+            cout << count << ": " << it->name << ": " << it->order << endl;
+            count++;
+        }
     }
     void process()
     {
@@ -208,6 +263,9 @@ class BraceletQueue {
 int main()
 {
     Queue coffeeShop = Queue();
+    MuffinQueue muffinShop = MuffinQueue();
+    BraceletQueue braceletShop = BraceletQueue();
+    GoatQueue goatShop = GoatQueue();
 
     coffeeShop.addToEnd();
     coffeeShop.addToEnd();
@@ -220,6 +278,9 @@ int main()
     {
         cout << "Round " << i + 1 << endl;
         coffeeShop.process();
+        muffinShop.process();
+        braceletShop.process();
+        goatShop.process();
         cout << endl;
     }
 
