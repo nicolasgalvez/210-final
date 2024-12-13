@@ -3,31 +3,20 @@
  * 210 final project
  */
 #include <iostream>
-#include <fstream>
-#include <map>
 #include <list>
 #include <deque>
 #include <vector>
-#include <random>
-#include <functional>
+#include <string>
 
 using namespace std;
 
-const int DATA_SIZE = 10, ROUNDS = 10, INITIAL_CUSTOMERS = 3;
+const int DATA_SIZE = 10, ROUNDS = 100, INITIAL_CUSTOMERS = 3;
 
-string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Chandler", "Gunther", "Janice", "Paul Rudd", "Susan"},
+string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Chandler", "Gunther", "Janice", "Susan", "Paul Rudd"},
        drinkData[DATA_SIZE] = {"Espresso", "Latte", "Cappuccino", "Mocha", "Americano", "Macchiato", "Flat White", "Soy Latte", "Irish Coffee", "Turkish Coffee"},
        muffinData[DATA_SIZE] = {"Blueberry", "Chocolate Chip", "Banana Nut", "Lemon Poppyseed", "Pumpkin Spice", "Cranberry Orange", "Apple Cinnamon", "Carrot", "Coffee Cake", "Double Chocolate"},
        friendShipBraceletData[DATA_SIZE] = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "White", "Brown"},
-       goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"};
-
-
-int randomInt(int min, int max) {
-    static std::random_device rd;  // Seed
-    static std::mt19937 gen(rd()); // Random number engine
-    std::uniform_int_distribution<> distrib(min, max); // Distribution
-    return distrib(gen);
-}
+       goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"}; // I guess these are types of goats?
 
 struct CoffeeCustomer
 {
@@ -174,10 +163,10 @@ public:
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = muffinData[rand() % DATA_SIZE];
-        
+
         if (temp.name == "Joey")
         {
-            temp.order = "All of them";
+            temp.order = "ALL OF THEM";
         }
 
         customers.push_back(temp);
