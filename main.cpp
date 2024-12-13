@@ -36,15 +36,23 @@ public:
         temp->order = drinkData[rand() % DATA_SIZE];
         temp->next = head;
         head = temp;
-        // cout << temp->order << temp->name;
+        cout << temp->name << " has joined. They usually want a " << temp->order << endl;
     }
     void removeCustomer(){
-
+        if(head == NULL){
+            cout << "No customers in line" << endl;
+            return;
+        }
     Customer *temp = head;
+    // We have to get the last item, which is the first item...
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+
     head = head->next;
     delete temp;
-
     }
+   
     void display(){
         Customer *temp = head;
         int cound = 1;
@@ -55,7 +63,14 @@ public:
         }
     }
     void process () {
+        // remove a customer
+        removeCustomer();
         
+        // if 50% chance, add a customer
+        if (rand() % 2 == 0) {
+            addCustomer();
+        }
+        display();
     }
 };
 
@@ -71,6 +86,13 @@ int main()
     cout << endl;
     coffeeShop.removeCustomer();
     coffeeShop.display();
-    // test(hash_table);
+
+    for (int i = 0; i < ROUNDS; i++) {
+        cout << "Round " << i + 1 << endl;
+        coffeeShop.process();
+        cout << endl;
+    }
+
+
     return 0;
 }
