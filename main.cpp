@@ -38,9 +38,32 @@ public:
         head = temp;
         cout << temp->name << " has joined. They usually want a " << temp->order << endl;
     }
+    void addToEnd() {
+        Customer *temp = new Customer();
+        temp->name = namesData[rand() % DATA_SIZE];
+        temp->order = drinkData[rand() % DATA_SIZE];
+        cout << temp->name << " has joined. They usually want a " << temp->order << endl;
+
+        temp->next = NULL;
+        if (head == NULL) {
+            head = temp;
+            return;
+        }
+        Customer *last = head;
+        while (last->next != NULL) {
+            last = last->next;
+        }
+        last->next = temp;
+    }
     void removeCustomer(){
         if(head == NULL){
             cout << "No customers in line" << endl;
+            return;
+        }
+        if (!head->next) {
+            cout << head->name << " has been served." << endl;   
+            delete head;   
+            head = NULL;
             return;
         }
     Customer *temp = head;
@@ -49,8 +72,20 @@ public:
         temp = temp->next;
     }
 
+    cout << temp->next->name << " has been served." << endl;   
+    delete temp->next;
+    temp->next = NULL;
+    }
+    void serve(){
+        if(head == NULL){
+            cout << "No customers in line" << endl;
+            return;
+        }
+    Customer *temp = head;
+    cout << head->name << " has been served." << endl; 
     head = head->next;
     delete temp;
+
     }
    
     void display(){
@@ -79,8 +114,8 @@ int main()
     Queue coffeeShop = Queue();
 
     coffeeShop.addCustomer();
-    coffeeShop.addCustomer();
-    coffeeShop.addCustomer();
+    coffeeShop.addToEnd();
+    // coffeeShop.addCustomer();
     
     coffeeShop.display();
     cout << endl;
