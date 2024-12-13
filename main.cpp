@@ -18,12 +18,19 @@ string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Ch
        friendShipBraceletData[DATA_SIZE] = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "White", "Brown"},
        goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"}; // I guess these are types of goats?
 
+/**
+ * Struct used for the queue
+ */
 struct CoffeeCustomer
 {
     string name;
     string order;
     CoffeeCustomer *next;
 };
+
+/**
+ * Struct for everything else.
+ */
 struct Customer
 {
     string name;
