@@ -1,9 +1,6 @@
 /**
  * Nick Galvez
- * 210 final
- * Using a struct, code a coffee booth queue simulation that uses a linked list as its core data structure.
- * The linked list's struct should be a node that contains the customer's name and drink order.
- * Create data arrays with names and drink orders from which to randomly create customer data.
+ * 210 final project
  */
 #include <iostream>
 #include <fstream>
@@ -14,7 +11,7 @@
 
 using namespace std;
 
-const int DATA_SIZE = 10, ROUNDS = 10;
+const int DATA_SIZE = 10, ROUNDS = 10, INITIAL_CUSTOMERS = 3;
 
 string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Chandler", "Gunther", "Janice", "Paul Rudd", "Susan"},
        drinkData[DATA_SIZE] = {"Espresso", "Latte", "Cappuccino", "Mocha", "Americano", "Macchiato", "Flat White", "Soy Latte", "Irish Coffee", "Turkish Coffee"},
@@ -22,22 +19,36 @@ string namesData[DATA_SIZE] = {"Phoebe", "Joey", "Monica", "Rachel", "Ross", "Ch
        friendShipBraceletData[DATA_SIZE] = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "White", "Brown"},
        goatData[DATA_SIZE] = {"Billy", "Nanny", "Kid", "Doe", "Buck", "Wether", "Doeling", "Buckling", "Nanny", "Sniffy"};
 
+struct CoffeeCustomer
+{
+    string name;
+    string order;
+    CoffeeCustomer *next;
+};
 struct Customer
 {
     string name;
     string order;
-    Customer *next;
 };
 
 class Queue
 {
 private:
-    Customer *head;
+    CoffeeCustomer *head;
 
 public:
+    Queue()
+    {
+        head = NULL;
+        // add 3 customers to the list
+        for (int i = 0; i < INITIAL_CUSTOMERS; i++)
+        {
+            addToEnd();
+        }
+    }
     void addCustomer()
     {
-        Customer *temp = new Customer();
+        CoffeeCustomer *temp = new CoffeeCustomer();
         temp->name = namesData[rand() % DATA_SIZE];
         temp->order = drinkData[rand() % DATA_SIZE];
         temp->next = head;
@@ -46,7 +57,7 @@ public:
     }
     void addToEnd()
     {
-        Customer *temp = new Customer();
+        CoffeeCustomer *temp = new CoffeeCustomer();
         temp->name = namesData[rand() % DATA_SIZE];
         temp->order = drinkData[rand() % DATA_SIZE];
         cout << temp->name << " has joined the coffee line. They usually want a " << temp->order << endl;
@@ -57,7 +68,7 @@ public:
             head = temp;
             return;
         }
-        Customer *last = head;
+        CoffeeCustomer *last = head;
         while (last->next != NULL)
         {
             last = last->next;
@@ -78,7 +89,7 @@ public:
             head = NULL;
             return;
         }
-        Customer *temp = head;
+        CoffeeCustomer *temp = head;
         // We have to get the last item, which is the first item...
         while (temp->next->next != NULL)
         {
@@ -96,7 +107,7 @@ public:
             cout << "No customers in line" << endl;
             return;
         }
-        Customer *temp = head;
+        CoffeeCustomer *temp = head;
         cout << head->name << " has been served a " << head->order << endl;
         head = head->next;
         delete temp;
@@ -105,7 +116,7 @@ public:
     void display()
     {
         cout << "Coffee Queue" << endl;
-        Customer *temp = head;
+        CoffeeCustomer *temp = head;
         int cound = 1;
         while (temp != NULL)
         {
@@ -128,24 +139,30 @@ public:
 };
 
 // deqeue
-class MuffinQueue {
-    private:
+class MuffinQueue
+{
+private:
     deque<Customer> customers;
-    public:
-    MuffinQueue() {
+
+public:
+    MuffinQueue()
+    {
         // add 3 customers to the list
-        addToEnd();
-        addToEnd();
-        addToEnd();
+        for (int i = 0; i < INITIAL_CUSTOMERS; i++)
+        {
+            addToEnd();
+        }
     }
-    void addToEnd() {
+    void addToEnd()
+    {
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = muffinData[rand() % DATA_SIZE];
         customers.push_back(temp);
-        cout << temp.name << " has joined the Muffin line. They usually want a " << temp.order << endl;
+        cout << temp.name << " has joined the Muffin line. They usually want a " << temp.order << " muffin." << endl;
     }
-    void serve() {
+    void serve()
+    {
         if (customers.size() == 0)
         {
             cout << "No customers in line" << endl;
@@ -178,24 +195,30 @@ class MuffinQueue {
 };
 
 // vector
-class BraceletQueue {
-    private:
+class BraceletQueue
+{
+private:
     vector<Customer> customers;
-    public:
-    BraceletQueue() {
+
+public:
+    BraceletQueue()
+    {
         // add 3 customers to the list
-        addToEnd();
-        addToEnd();
-        addToEnd();
+        for (int i = 0; i < INITIAL_CUSTOMERS; i++)
+        {
+            addToEnd();
+        }
     }
-    void addToEnd() {
+    void addToEnd()
+    {
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
         temp.order = friendShipBraceletData[rand() % DATA_SIZE];
         customers.push_back(temp);
         cout << temp.name << " has joined the bracelet line. They usually want a " << temp.order << endl;
     }
-    void serve() {
+    void serve()
+    {
         if (customers.size() == 0)
         {
             cout << "No customers in line" << endl;
@@ -203,7 +226,6 @@ class BraceletQueue {
         }
         cout << customers[0].name << " has been served a " << customers[0].order << endl;
         customers.erase(customers.begin());
-
     }
     void display()
     {
@@ -229,17 +251,22 @@ class BraceletQueue {
 };
 
 // list
-class GoatQueue {
-    private:
+class GoatQueue
+{
+private:
     list<Customer> customers;
-    public:
-    GoatQueue() {
+
+public:
+    GoatQueue()
+    {
         // add 3 customers to the list
-        addToEnd();
-        addToEnd();
-        addToEnd();
+        for (int i = 0; i < INITIAL_CUSTOMERS; i++)
+        {
+            addToEnd();
+        }
     }
-    void addToEnd() {
+    void addToEnd()
+    {
         // add a customer to the end of the list
         Customer temp;
         temp.name = namesData[rand() % DATA_SIZE];
@@ -247,13 +274,15 @@ class GoatQueue {
         customers.push_back(temp);
         cout << temp.name << " has joined the goat line. They usually want a " << temp.order << endl;
     }
-    void serve() {
+    void serve()
+    {
         if (customers.size() == 0)
         {
             cout << "No customers in line" << endl;
             return;
         }
         cout << customers.front().name << " has been served." << endl;
+        customers.pop_front();
     }
     void display()
     {
@@ -278,7 +307,6 @@ class GoatQueue {
     }
 };
 
-
 int main()
 {
     Queue coffeeShop = Queue();
@@ -286,16 +314,10 @@ int main()
     BraceletQueue braceletShop = BraceletQueue();
     GoatQueue goatShop = GoatQueue();
 
-    coffeeShop.addToEnd();
-    coffeeShop.addToEnd();
-    coffeeShop.addToEnd();
-
-    coffeeShop.display();
-    cout << endl;
-
     for (int i = 0; i < ROUNDS; i++)
     {
-        cout << "Round " << i + 1 << endl;
+        cout << endl
+             << "====== Round " << i + 1 << endl;
         coffeeShop.process();
         muffinShop.process();
         braceletShop.process();
